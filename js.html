@@ -7,37 +7,62 @@
     <style>
         div {
             border: 1px solid black;
-            width: 100px;
-            height: 100px;
+        }
+        button {
+            background-color: white;
+        }
+        .text {
+            width: 300px;
+            height: 40px;
             text-align: center;
             display: table-cell;
             vertical-align: middle;
         }
-        #setPhoneNum {
-            border: 1px solid black;
-            width: 100px;
+        .btPhone {
+            width: 90px;
+            height: 90px;
+            margin: 3px;
+        }
+        #setAmount {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        #phone {
+            width: 300px;
+            height: 385px;
+            margin-top: 5px;
         }
     </style>
     <script src="jquery-3.5.1.min.js"></script>
     <script>
+        let count = 1; //휴대폰 번호 3자리 카운트
+
         function getRandomInt(min, max) { //랜덤
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
-
-        function btAmount() {
+        function btAmount() { // 금액설정 버튼
             $("#amount").html(getRandomInt(1, 100) +",000원");
         }
-
+        function btPhone() { //휴대폰 번호 입력 (3자리마다 - 표시)
+            let textLength = $("#setPhoneNum").text().length;
+            if(textLength < 4 && textLength%3 == 0) {
+                $("#setPhoneNum").append("-");
+            } else if(textLength > 4 && (textLength-count)%3==0) {
+                $("#setPhoneNum").append("-");
+                count+=1;
+            }
+        }
         $(document).ready(function() {
             document.querySelector("#setAmount").addEventListener("click", btAmount);
+            document.querySelector(".btPhone").addEventListener("click", btPhone);
             //document.querySelector("button").addEventListener("click", btAmount);
         });
     </script>
 </head>
 <body>
-    <div id="amount"></div>
-    <button id="setAmount">금액 설정</button><br>
-    <text id="setPhoneNum"></text><br>
+    <div class = "text" id="amount"></div>
+    <button id="setAmount">금액 설정</button>
+    <div class = "text" id="setPhoneNum"></div>
     <div id="phone">
         <button class="btPhone" onclick="$('#setPhoneNum').append(1);">1</button>
         <button class="btPhone" onclick="$('#setPhoneNum').append(2);">2</button>
