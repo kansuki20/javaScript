@@ -50,7 +50,7 @@
         <button class="btPhone" onclick="$('#setPhoneNum').append(9);">9</button>
         <button class="btPhone" onclick="$('#setPhoneNum').empty();">C</button>
         <button class="btPhone" onclick="$('#setPhoneNum').append(0);">0</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').back()">X</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').html($('#setPhoneNum').text().substring(0, $('#setPhoneNum').text().length-1))">X</button>
         <!--exp.value = exp.value.substring(0, exp.value.length-1);-->
         <!--$(input).val($(input).val().substring(0, $(input).val().length - 1));-->
     </div>
