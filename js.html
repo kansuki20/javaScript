@@ -60,14 +60,22 @@
                 $("#setPhoneNum").append("-");
             }
         }
+        function btBackSpace() {
+            let str = $('#setPhoneNum').text();
+            if (str.substr(str.length-1) == "-") {
+                $('#setPhoneNum').html(str.substring(0, str.length-2));
+            } else {
+                $('#setPhoneNum').html(str.substring(0, str.length-1));
+            }
+        }
         $(document).ready(function() {
             document.querySelector("#setAmount").addEventListener("click", btAmount);
+            document.querySelector("#backSpace").addEventListener("click", btBackSpace);
 
-            let phoneBt = document.querySelectorAll(".btPhone")
+            let phoneBt = document.querySelectorAll(".btPhone");
             for(let item of phoneBt){
                 item.addEventListener("click", btPhone);
             }
-
         });
     </script>
 </head>
@@ -87,7 +95,8 @@
         <button class="btPhone" onclick="$('#setPhoneNum').append(9);">9</button>
         <button class="btPhone_1" onclick="$('#setPhoneNum').empty();">C</button>
         <button class="btPhone" onclick="$('#setPhoneNum').append(0);">0</button>
-        <button class="btPhone_1" onclick="$('#setPhoneNum').html($('#setPhoneNum').text().substring(0, $('#setPhoneNum').text().length-1))">X</button>
+        <button id="backSpace" class="btPhone_1">X</button>
+        <!--<button id="backSpace" class="btPhone_1" onclick="$('#setPhoneNum').html($('#setPhoneNum').text().substring(0, $('#setPhoneNum').text().length-1))">X</button>-->
         <!--exp.value = exp.value.substring(0, exp.value.length-1);-->
         <!--$(input).val($(input).val().substring(0, $(input).val().length - 1));-->
     </div>
