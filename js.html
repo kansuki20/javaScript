@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+        }
+        #setPhoneNum {
+            border: 1px solid black;
+            width: 100px;
+        }
+    </style>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        function getRandomInt(min, max) { //랜덤
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function btAmount() {
+            $("#amount").html(getRandomInt(1, 100) +",000원");
+        }
+
+        $(document).ready(function() {
+            document.querySelector("#setAmount").addEventListener("click", btAmount);
+            //document.querySelector("button").addEventListener("click", btAmount);
+        });
+    </script>
+</head>
+<body>
+    <div id="amount"></div>
+    <button id="setAmount">금액 설정</button><br>
+    <text id="setPhoneNum"></text><br>
+    <div id="phone">
+        <button class="btPhone" onclick="$('#setPhoneNum').append(1);">1</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(2);">2</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(3);">3</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(4);">4</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(5);">5</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(6);">6</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(7);">7</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(8);">8</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(9);">9</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').empty();">C</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').append(0);">0</button>
+        <button class="btPhone" onclick="$('#setPhoneNum').back()">X</button>
+        <!--exp.value = exp.value.substring(0, exp.value.length-1);-->
+        <!--$(input).val($(input).val().substring(0, $(input).val().length - 1));-->
+    </div>
+</body>
+</html>
