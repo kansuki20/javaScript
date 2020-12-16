@@ -52,30 +52,34 @@
         function btAmount() { // 금액설정 버튼
             $("#amount").html(getRandomInt(1, 100) +",000원");
         }
-        function btPhone() { 
+        function btPhone() { // 휴대폰 번호 입력 버튼
             let textLength = $("#setPhoneNum").text().length;
-            if(textLength < 4 && textLength%3 == 0) {//휴대폰 번호 입력 (3번째에 - 표시)
-                $("#setPhoneNum").append("-");
-            } else if(textLength > 4 && textLength < 12 && textLength%4==0) {//4자리 칠 때 마다 - 표시
-                $("#setPhoneNum").append("-");
-            }
+            if(textLength > 0 && textLength < 4 && textLength%3 == 0) {//휴대폰 번호 입력 (4번째 자리에 - 표시)
+                $("#setPhoneNum").append("-" + this.value);
+            } else if(textLength > 4 && textLength < 12 && textLength%8 == 0) {//(9번째 자리에 - 표시)
+                $("#setPhoneNum").append("-" + this.value);
+            } else
+                $("#setPhoneNum").append(this.value);
         }
-        function btBackSpace() {
+        function btBackSpace() { //backSpace 버튼
             let str = $('#setPhoneNum').text();
-            if (str.substr(str.length-1) == "-") {
+            if (str.substr(str.length-2, 1) == "-") {
                 $('#setPhoneNum').html(str.substring(0, str.length-2));
             } else {
                 $('#setPhoneNum').html(str.substring(0, str.length-1));
             }
         }
         $(document).ready(function() {
-            document.querySelector("#setAmount").addEventListener("click", btAmount);
-            document.querySelector("#backSpace").addEventListener("click", btBackSpace);
+            $("#setAmount").click(btAmount);
+            $("#backSpace").click(btBackSpace);
+            $(".btPhone").click(btPhone);
 
-            let phoneBt = document.querySelectorAll(".btPhone");
+            //document.querySelector("#setAmount").addEventListener("click", btAmount);
+            //document.querySelector("#backSpace").addEventListener("click", btBackSpace);
+            /*let phoneBt = document.querySelectorAll(".btPhone");
             for(let item of phoneBt){
                 item.addEventListener("click", btPhone);
-            }
+            }*/
         });
     </script>
 </head>
@@ -84,17 +88,17 @@
     <button id="setAmount">금액 설정</button>
     <div class = "text" id="setPhoneNum"></div>
     <div id="phone">
-        <button class="btPhone" onclick="$('#setPhoneNum').append(1);">1</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(2);">2</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(3);">3</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(4);">4</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(5);">5</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(6);">6</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(7);">7</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(8);">8</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(9);">9</button>
+        <button class="btPhone" value="1">1</button>
+        <button class="btPhone" value="2">2</button>
+        <button class="btPhone" value="3">3</button>
+        <button class="btPhone" value="4">4</button>
+        <button class="btPhone" value="5">5</button>
+        <button class="btPhone" value="6">6</button>
+        <button class="btPhone" value="7">7</button>
+        <button class="btPhone" value="8">8</button>
+        <button class="btPhone" value="9">9</button>
         <button class="btPhone_1" onclick="$('#setPhoneNum').empty();">C</button>
-        <button class="btPhone" onclick="$('#setPhoneNum').append(0);">0</button>
+        <button class="btPhone" value="0">0</button>
         <button id="backSpace" class="btPhone_1">X</button>
         <!--<button id="backSpace" class="btPhone_1" onclick="$('#setPhoneNum').html($('#setPhoneNum').text().substring(0, $('#setPhoneNum').text().length-1))">X</button>-->
         <!--exp.value = exp.value.substring(0, exp.value.length-1);-->
