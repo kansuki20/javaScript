@@ -32,13 +32,13 @@ function saveAmount() { //로컬스토리지에 데이터 저장
     }
     else {
         if(x==null) { //해당 휴대폰 번호가 존재하지 않을 때
-            a.amount = [parseInt($("#amount").text().replace(",", ""))]; //replace로 ,을 없애주고 parseInt로 자료형 number로 바꾸기
+            a.amount = [parseInt($("#amount").text())];
             a.count = 1;
             a.date = [new Date().toLocaleDateString()];
             localStorage.setItem($("#setPhoneNum").text(), JSON.stringify(a));
             x = a;
         } else { //휴대폰 번호가 존재할 때
-            x.amount.push(parseInt($("#amount").text().replace(",", "")));
+            x.amount.push(parseInt($("#amount").text()));
             x.count++;
             x.date.push(new Date().toLocaleDateString());
             localStorage.setItem($("#setPhoneNum").text(), JSON.stringify(x));
@@ -49,7 +49,7 @@ function saveAmount() { //로컬스토리지에 데이터 저장
             sumAmount += item;
         /*sumAmount = sumAmount + "";
         sumAmount = sumAmount.splice(sumAmount.length, 1);*/
-        $("#tdAmount").html(sumAmount+"원");
+        $("#tdAmount").html(sumAmount+",000원");
         $("#tdCount").html(x.count);
     }
 }
