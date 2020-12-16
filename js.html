@@ -69,10 +69,33 @@
                 $('#setPhoneNum').html(str.substring(0, str.length-1));
             }
         }
+
+        function createItem() {
+            //localStorage.setItem($("#setPhoneNum").text(), $("#amount").text(), Date.now());
+            localStorage.setItem($("#setPhoneNum").text(), JSON.stringify(obj));
+        }
+        function saveAmount() {
+            let x = JSON.parse(localStorage.getItem($("#setPhoneNum").text()));
+            let a = {};
+            if(x==null) { //해당 휴대폰 번호가 존재하지 않을 때
+                a.amount = [$("#amount").text()];
+                a.count = 1;
+                a.date = [new Date().toLocaleDateString()];
+                localStorage.setItem($("#setPhoneNum").text(), JSON.stringify(a));
+            } else { //휴대폰 번호가 존재할 때
+                x.amount.push($("#amount").text());
+                x.count++;
+                x.date.push(new Date().toLocaleDateString());
+                localStorage.setItem($("#setPhoneNum").text(), JSON.stringify(x));
+            }
+        }
+
         $(document).ready(function() {
             $("#setAmount").click(btAmount);
             $("#backSpace").click(btBackSpace);
             $(".btPhone").click(btPhone);
+            //$("#saveAmount").click(createItem);
+            $("#saveAmount").click(saveAmount);
 
             //document.querySelector("#setAmount").addEventListener("click", btAmount);
             //document.querySelector("#backSpace").addEventListener("click", btBackSpace);
@@ -105,5 +128,6 @@
         <!--$(input).val($(input).val().substring(0, $(input).val().length - 1));-->
     </div>
     <button id="saveAmount">저장</button>
+    <div id="milege"></div>
 </body>
 </html>
