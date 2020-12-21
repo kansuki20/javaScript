@@ -25,7 +25,7 @@ function saveAmount() { //로컬스토리지에 데이터 저장
     let x = JSON.parse(localStorage.getItem($("#setPhoneNum").text()));
     let a = {};
     if($("#amount").text() == "") {
-        alert("금액을 설정해 주세요.")
+        alert("금액을 설정해 주세요.");
     }
     else if($("#setPhoneNum").text() == "") {
         alert("휴대폰 번호를 입력해주세요.");
@@ -49,16 +49,43 @@ function saveAmount() { //로컬스토리지에 데이터 저장
             sumAmount += item;
         /*sumAmount = sumAmount + "";
         sumAmount = sumAmount.splice(sumAmount.length, 1);*/
-        $("#tdAmount").html(sumAmount+",000원");
+        $("#tdAmount").html(sumAmount.toLocaleString()+",000원");
         $("#tdCount").html(x.count);
     }
 }
-
+function loadAllMember() {
+    $('#tbod').empty();
+    let obj;
+    let phoneNum;
+    let objAmount = 0;
+    let objCount;
+    // .key(i)는 i번째 키의 이름 반환
+    for (let i = 0; i < localStorage.length; ++i ) {
+        obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+        phoneNum = localStorage.key(i);
+        for(let item of obj.amount)
+            objAmount += item;
+        addLow(phoneNum, obj.count, objAmount.toLocaleString() + ",000원");
+    }
+    //alert(phoneNum);
+}
+function addLow(c0, c1, c2) { //테이블에 행 추가용으로 쓸 함수
+    let tbody = document.querySelector("#tbod");
+    let row = tbody.insertRow(tbody.rows.length);
+    let cell0 = row.insertCell(0);
+    let cell1 = row.insertCell(1);
+    let cell2 = row.insertCell(2);
+    cell0.innerHTML = c0;
+    cell1.innerHTML = c1;
+    cell2.innerHTML = c2;
+}
+//toLocaleString()을 쓰면 숫자를 특정 언어에 맞게 문자열로 변환해줌
 $(document).ready(function() {
     $("#setAmount").click(btAmount);
     $("#backSpace").click(btBackSpace);
     $(".btPhone").click(btPhone);
     $("#saveAmount").click(saveAmount);
+    $("#btAllMember").click(loadAllMember);
 
     //document.querySelector("#setAmount").addEventListener("click", btAmount);
     //document.querySelector("#backSpace").addEventListener("click", btBackSpace);
