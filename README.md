@@ -1,8 +1,8 @@
 # javaScript
 자바스크립트 기말과제용
 
-실행해야 할 html파일명\n
-  js.html
+실행해야 할 html파일명   
+```   js.html```
 ```
 기능 안내   
   function getRandomInt(min, max)   
