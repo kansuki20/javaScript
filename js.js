@@ -34,7 +34,7 @@ function saveAmount() { //로컬스토리지에 데이터 저장
         if(x==null) { //해당 휴대폰 번호가 존재하지 않을 때
             a.amount = [parseInt($("#amount").text())];
             a.count = 1;
-            a.date = [new Date().toLocaleDateString()];
+            a.date = [new Date().toLocaleDateString()]; //toLocaleString()을 쓰면 숫자를 특정 언어에 맞게 문자열로 변환해줌
             localStorage.setItem($("#setPhoneNum").text(), JSON.stringify(a));
             x = a;
         } else { //휴대폰 번호가 존재할 때
@@ -53,7 +53,7 @@ function saveAmount() { //로컬스토리지에 데이터 저장
         $("#tdCount").html(x.count);
     }
 }
-function loadAllMember() {
+function loadAllMember() { //로컬 스토리지에 저장된 키를 전부 불러오고 테이블에 표시
     $('#tbod').empty();
     let obj;
     let phoneNum;
@@ -79,7 +79,6 @@ function addLow(c0, c1, c2) { //테이블에 행 추가용으로 쓸 함수
     cell1.innerHTML = c1;
     cell2.innerHTML = c2;
 }
-//toLocaleString()을 쓰면 숫자를 특정 언어에 맞게 문자열로 변환해줌
 $(document).ready(function() {
     $("#setAmount").click(btAmount);
     $("#backSpace").click(btBackSpace);
